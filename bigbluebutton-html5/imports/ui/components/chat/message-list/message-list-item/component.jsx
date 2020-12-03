@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedTime, defineMessages, injectIntl } from 'react-intl';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 import UserAvatar from '/imports/ui/components/user-avatar/component';
 import Message from './message/component';
@@ -65,23 +65,24 @@ class MessageListItem extends Component {
   renderSystemMessage() {
     const {
       messages,
-      chatAreaId,
-      handleReadMessage,
+      // chatAreaId,
+      // handleReadMessage,
     } = this.props;
-
+    const baseName = Meteor.settings.public.app.cdn + Meteor.settings.public.app.basename;
     return (
       <div className={styles.messages}>
-        {messages.map(message => (
-          message.text !== ''
+        {messages.map((message, i) => (
+          message.text !== '' && i === 0
             ? (
-              <Message
-                className={(message.id ? styles.systemMessage : null)}
-                key={_.uniqueId('id-')}
-                text={message.text}
-                time={message.time}
-                chatAreaId={chatAreaId}
-                handleReadMessage={handleReadMessage}
-              />
+              // <Message
+              //   className={(message.id ? styles.systemMessage : null)}
+              //   key={_.uniqueId('id-')}
+              //   text={message.text}
+              //   time={message.time}
+              //   chatAreaId={chatAreaId}
+              //   handleReadMessage={handleReadMessage}
+              // />
+              <div className={styles.systemMessage} style={{ background: `url('${baseName}/resources/images/temp/welcome-example.png')` }} />
             ) : null
         ))}
       </div>
